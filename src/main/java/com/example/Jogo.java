@@ -11,7 +11,7 @@ public class Jogo {
     }
 
     public Carta distribuiCartaParaJogador(Jogador jogador) {
-        if (jogador.parou() == true) {
+        if (jogador.parou()) {
             return null;
         }
         Carta cartaVirada = monte.virar();
@@ -20,18 +20,14 @@ public class Jogo {
     }
 
     public boolean acabou() {
-        if ((jogador.parou() == true && computador.parou() == true)
-                || (jogador.getPontos() >= 21 || computador.getPontos() >= 21)) {
-            return true;
-        }
-        return false;
+        return ((jogador.parou() && computador.parou()) || (jogador.getPontos() >= 21 || computador.getPontos() >= 21));
     }
 
     public String resultado() {
         if (jogador.getPontos() == computador.getPontos()
                 || (jogador.getPontos() > 21 && computador.getPontos() > 21)) {
             return "Empate!";
-        } else if (jogador.getPontos() > computador.getPontos() && jogador.getPontos() <= 21) {
+        } else if ((jogador.getPontos() > computador.getPontos() && jogador.getPontos() <= 21) || computador.getPontos() >= 21) {
             return "Você ganhou!";
         } else {
             return "Você perdeu!";

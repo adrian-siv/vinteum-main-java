@@ -1,9 +1,12 @@
 package com.example;
 
+import com.example.data.ResultadoDao;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+
 
 public class PrimaryController {
 
@@ -18,11 +21,18 @@ public class PrimaryController {
     private Jogo jogo = new Jogo();
 
     private void turno(){
-        jogo.distribuiCartaParaJogador(jogo.getJogador());
-        jogo.distribuiCartaParaJogador(jogo.getComputador());
+        jogo.distribuiCartaParaJogador(jogo.jogador);
+        
+        if(!jogo.computador.parou()){
+            jogo.distribuiCartaParaJogador(jogo.computador);
+            if (jogo.jogador.parou()) turno();
+        }
 
         if (jogo.acabou() == true) {
             resultado.setText(jogo.resultado());
+
+            var resultadoDao = new ResultadoDao();
+            ResultadoDao.inserir(jogo.jogador.getPontos(), jogo.computador.getPontos(), );
         }
         atualizar();
     }

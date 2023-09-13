@@ -3,7 +3,7 @@ package com.example.data;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class resultadoDao {
+public class ResultadoDao {
 
     private final String HOST = "auth-db719.hstgr.io";
     private final String PORT = "1521";
